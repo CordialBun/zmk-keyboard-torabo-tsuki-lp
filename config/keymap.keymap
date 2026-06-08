@@ -35,48 +35,15 @@
 #define NUM  3
 #define SYM  4
 
-#define MY_KANA_COMBO_TIMEOUT_MS 60
-#define MY_KANA_MACRO_WAIT_MS    40
-#define MY_KANA_MACRO_TAP_MS     40
-#define MY_KANA_MODS (MOD_LCTL|MOD_RCTL|MOD_LSFT|MOD_RSFT|MOD_LALT|MOD_RALT|MOD_LGUI|MOD_RGUI)
+#define LOGOS_KANA_LAYER KANA
+#define LOGOS_KANA_ON_BINDINGS <&kp JP_KANA>, <&tog KANA>
+#define LOGOS_KANA_OFF_BINDINGS <&kp JP_EISU>, <&tog KANA>
 
-#ifndef MY_KANA_USE_IME_SWITCH
-#define MY_KANA_USE_IME_SWITCH 1
-#endif
+#include "logos_kana/logos_kana_qwerty.dtsi"
+#include "logos_kana/logos_kana_torabo_tsuki_lp.dtsi"
+#include "logos_kana/logos_kana.dtsi"
 
 / {
-    behaviors {
-#include "my_kana/generated/my_kana_behaviors_torabo_tsuki_lp.dtsi"
-    };
-
-    macros {
-        my_kana_on: my_kana_on {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <MY_KANA_MACRO_WAIT_MS>;
-            tap-ms = <MY_KANA_MACRO_TAP_MS>;
-#if MY_KANA_USE_IME_SWITCH
-            bindings = <&kp JP_KANA>, <&tog KANA>;
-#else
-            bindings = <&tog KANA>;
-#endif
-        };
-
-        my_kana_off: my_kana_off {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <MY_KANA_MACRO_WAIT_MS>;
-            tap-ms = <MY_KANA_MACRO_TAP_MS>;
-#if MY_KANA_USE_IME_SWITCH
-            bindings = <&kp JP_EISU>, <&tog KANA>;
-#else
-            bindings = <&tog KANA>;
-#endif
-        };
-
-#include "my_kana/generated/my_kana_macros.dtsi"
-    };
-
     combos {
         compatible = "zmk,combos";
 
@@ -85,8 +52,6 @@
             key-positions = <28 29>;
             layers = <NUM>;
         };
-
-#include "my_kana/generated/my_kana_combos_torabo_tsuki_lp.dtsi"
     };
 
     keymap {
@@ -98,11 +63,11 @@
 &kp TAB    &kp Q         &kp W     &kp E     &kp R             &kp T                         &kp Y   &kp U     &kp I      &kp O     &kp P      &kp BSPC
 &kp LCTRL  &kp A         &kp S     &kp D     &kp F             &kp G   &mkp LCLK  &mkp RCLK  &kp H   &kp J     &kp K      &kp L     &kp SEMI   &kp ENTER
 &kp LSHFT  &kp Z         &kp X     &kp C     &kp V             &kp B   &kp SPACE  &kp RET    &kp N   &kp M     &kp COMMA  &kp DOT   &kp SLASH  &kp RSHFT
-&kp ESC    &kp LEFT_GUI  &kp LGUI  &kp LALT  &kp INT_MUHENKAN  &mo NUM  &kp SPACE  &mo SYM    &mo NAV  &kp BSPC  &kp RALT   &kp RGUI  &kp RCTRL  &my_kana_on
+&kp ESC    &kp LEFT_GUI  &kp LGUI  &kp LALT  &kp INT_MUHENKAN  &mo NUM  &kp SPACE  &mo SYM    &mo NAV  &kp BSPC  &kp RALT   &kp RGUI  &kp RCTRL  &logos_kana_on
             >;
         };
 
-#include "my_kana/generated/my_kana_layer_torabo_tsuki_lp.dtsi"
+        LOGOS_KANA_LAYER_NODE
 
         nav_layer {
             bindings = <
