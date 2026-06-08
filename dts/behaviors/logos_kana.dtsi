@@ -1,0 +1,61 @@
+/*
+ * SPDX-License-Identifier: MIT
+ */
+
+#ifndef LOGOS_KANA_LAYER
+#error "LOGOS_KANA_LAYER must be defined before including logos_kana.dtsi"
+#endif
+
+#ifndef LOGOS_KANA_MACRO_WAIT_MS
+#define LOGOS_KANA_MACRO_WAIT_MS 40
+#endif
+
+#ifndef LOGOS_KANA_MACRO_TAP_MS
+#define LOGOS_KANA_MACRO_TAP_MS 40
+#endif
+
+#ifndef LOGOS_KANA_ON_BINDINGS
+#define LOGOS_KANA_ON_BINDINGS <&tog LOGOS_KANA_LAYER>
+#endif
+
+#ifndef LOGOS_KANA_OFF_BINDINGS
+#define LOGOS_KANA_OFF_BINDINGS <&tog LOGOS_KANA_LAYER>
+#endif
+
+#ifdef LOGOS_KANA_LAYER_BINDINGS
+#define LOGOS_KANA_LAYER_NODE \
+        logos_kana_layer { \
+            display-name = "Logos Kana"; \
+            bindings = < \
+LOGOS_KANA_LAYER_BINDINGS \
+            >; \
+        };
+#endif
+
+/ {
+    behaviors {
+        /omit-if-no-ref/ lgk: logos_kana {
+            compatible = "zmk,behavior-logos-kana";
+            label = "LOGOS_KANA";
+            #binding-cells = <2>;
+        };
+    };
+
+    macros {
+        logos_kana_on: logos_kana_on {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <LOGOS_KANA_MACRO_WAIT_MS>;
+            tap-ms = <LOGOS_KANA_MACRO_TAP_MS>;
+            bindings = LOGOS_KANA_ON_BINDINGS;
+        };
+
+        logos_kana_off: logos_kana_off {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <LOGOS_KANA_MACRO_WAIT_MS>;
+            tap-ms = <LOGOS_KANA_MACRO_TAP_MS>;
+            bindings = LOGOS_KANA_OFF_BINDINGS;
+        };
+    };
+};

@@ -8,11 +8,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 LAYOUT_CSV = ROOT / "data" / "logos_kana_layout.csv"
 ROMAJI_CSV = ROOT / "data" / "logos_kana_romaji.csv"
-OUT_DIR = ROOT / "config" / "logos_kana"
 
-LOGOS_KANA_OUT = OUT_DIR / "logos_kana.dtsi"
-QWERTY_OUT = OUT_DIR / "logos_kana_qwerty.dtsi"
-PROFILE_OUT = OUT_DIR / "logos_kana_torabo_tsuki_lp.dtsi"
+KEYS_HEADER_OUT = ROOT / "include" / "dt-bindings" / "logos_kana" / "keys.h"
+QWERTY_OUT = ROOT / "dts" / "behaviors" / "logos_kana_qwerty.dtsi"
+PROFILE_OUT = ROOT / "dts" / "behaviors" / "logos_kana_torabo_tsuki_lp.dtsi"
+MAP_OUT = ROOT / "src" / "logos_kana_map.inc"
 
 TOTAL_POSITIONS = 66
 KANA_TOGGLE_POSITION = 65
@@ -66,12 +66,6 @@ ROMAJI_KEYCODES = {
     "-": "MINUS",
     ",": "COMMA",
     ".": "DOT",
-}
-
-NAME_OVERRIDES = {
-    "、": "comma",
-    "。": "period",
-    "ー": "long",
 }
 
 LAYOUT_KEY_ORDER = [
@@ -130,6 +124,14 @@ def macro_suffix_for_key(key):
     return keycode_for_layout_key(key)
 
 
+def key_define_for_layout_key(key):
+    return f"LOGOS_KANA_KEY_{macro_suffix_for_key(key)}"
+
+
+def binding_define_for_layout_key(key):
+    return f"LOGOS_KANA_{macro_suffix_for_key(key)}"
+
+
 def keycode_for_char(char):
     if re.fullmatch(r"[a-z]", char):
         return char.upper()
@@ -144,22 +146,6 @@ def keycode_for_layout_key(key):
     if key in LAYOUT_KEYCODES:
         return LAYOUT_KEYCODES[key]
     raise ValueError(f"Unsupported layout key: {key!r}")
-
-
-def make_node_name(row, used_names):
-    base = NAME_OVERRIDES.get(row["output"], row["romaji"])
-    base = re.sub(r"[^a-z0-9]+", "_", base.lower()).strip("_")
-    name = f"logos_kana_{base}"
-    if name not in used_names:
-        used_names.add(name)
-        return name
-
-    suffix = 2
-    while f"{name}_{suffix}" in used_names:
-        suffix += 1
-    name = f"{name}_{suffix}"
-    used_names.add(name)
-    return name
 
 
 def validate_unique(rows, key_fn, label):
@@ -181,7 +167,7 @@ def load_romaji():
 def load_layout():
     rows = read_csv(LAYOUT_CSV, ["output", "key1", "key2"])
     validate_unique(rows, lambda row: row["output"], "layout output")
-    validate_unique(rows, lambda row: (row["key1"], row["key2"]), "layout key combo")
+    validate_unique(rows, lambda row: tuple(sorted([row["key1"], row["key2"]])), "layout key combo")
 
     for index, row in enumerate(rows, start=2):
         for key_name in ["key1", "key2"]:
@@ -207,244 +193,60 @@ def prepare_rows():
     if missing:
         raise ValueError(f"Missing romaji mapping for: {', '.join(missing)}")
 
-    used_names = set()
     for row in rows:
         row["romaji"] = romaji[row["output"]]
-        row["node"] = make_node_name(row, used_names)
     return rows
 
 
-def fallback_macro(key):
-    return f"LOGOS_KANA_FALLBACK_{macro_suffix_for_key(key)}"
-
-
-def position_macro(key):
-    return f"LOGOS_KANA_POS_{macro_suffix_for_key(key)}"
-
-
-def write_required_define_checks(lines):
-    required = [
-        "LOGOS_KANA_LAYER",
-        "LOGOS_KANA_TOTAL_POSITIONS",
-        "LOGOS_KANA_ROW_LENGTHS",
-        "LOGOS_KANA_TOGGLE_POSITION",
-        "LOGOS_KANA_LAYER_BINDINGS",
-    ]
-    required.extend(position_macro(key) for key in LAYOUT_KEY_ORDER)
-    required.extend(fallback_macro(key) for key in LAYOUT_KEY_ORDER)
-
-    for define in required:
-        lines.extend(
-            [
-                f"#ifndef {define}",
-                f'#error "{define} must be defined before including logos_kana.dtsi"',
-                "#endif",
-            ]
-        )
-    lines.append("")
-
-
-def write_defaults(lines):
-    lines.extend(
-        [
-            "#ifndef LOGOS_KANA_COMBO_TIMEOUT_MS",
-            "#define LOGOS_KANA_COMBO_TIMEOUT_MS 60",
-            "#endif",
-            "",
-            "#ifndef LOGOS_KANA_MACRO_WAIT_MS",
-            "#define LOGOS_KANA_MACRO_WAIT_MS 40",
-            "#endif",
-            "",
-            "#ifndef LOGOS_KANA_MACRO_TAP_MS",
-            "#define LOGOS_KANA_MACRO_TAP_MS 40",
-            "#endif",
-            "",
-            "#ifndef LOGOS_KANA_MODS",
-            "#define LOGOS_KANA_MODS (MOD_LCTL|MOD_RCTL|MOD_LSFT|MOD_RSFT|MOD_LALT|MOD_RALT|MOD_LGUI|MOD_RGUI)",
-            "#endif",
-            "",
-            "#ifndef LOGOS_KANA_ON_BINDINGS",
-            "#define LOGOS_KANA_ON_BINDINGS <&tog LOGOS_KANA_LAYER>",
-            "#endif",
-            "",
-            "#ifndef LOGOS_KANA_OFF_BINDINGS",
-            "#define LOGOS_KANA_OFF_BINDINGS <&tog LOGOS_KANA_LAYER>",
-            "#endif",
-            "",
-        ]
-    )
-
-
-def write_layer_node_macro(lines):
-    lines.extend(
-        [
-            "#define LOGOS_KANA_LAYER_NODE \\",
-            "        logos_kana_layer { \\",
-            '            display-name = "Logos Kana"; \\',
-            "            bindings = < \\",
-            "LOGOS_KANA_LAYER_BINDINGS \\",
-            "            >; \\",
-            "        };",
-            "",
-        ]
-    )
-
-
-def write_main_dtsi(rows):
+def write_keys_header():
     lines = [
-        "// Generated by tools/generate_logos_kana_zmk.py. Do not edit manually.",
+        "/* Generated by tools/generate_logos_kana_zmk.py. Do not edit manually. */",
+        "",
+        "#pragma once",
+        "",
+        "#define LOGOS_KANA_KEY_NONE 0xFF",
         "",
     ]
-    write_required_define_checks(lines)
-    write_defaults(lines)
-    write_layer_node_macro(lines)
-
-    lines.extend(
-        [
-            "/ {",
-            "    behaviors {",
-        ]
-    )
-
-    for row in rows:
-        if row["key2"]:
-            normal_binding = f"&{row['node']}"
-            modified_binding = f"&{row['node']}_pass"
-            behavior_name = f"{row['node']}_combo"
-        else:
-            normal_binding = f"&{row['node']}"
-            modified_binding = f"&kp {fallback_macro(row['key1'])}"
-            behavior_name = f"{row['node']}_key"
-
-        lines.extend(
-            [
-                f"        {behavior_name}: {behavior_name} {{",
-                '            compatible = "zmk,behavior-mod-morph";',
-                "            #binding-cells = <0>;",
-                f"            bindings = <{normal_binding}>, <{modified_binding}>;",
-                "            mods = <LOGOS_KANA_MODS>;",
-                "            keep-mods = <LOGOS_KANA_MODS>;",
-                "        };",
-                "",
-            ]
-        )
-
-    lines.extend(
-        [
-            "    };",
-            "",
-            "    macros {",
-            "        logos_kana_on: logos_kana_on {",
-            '            compatible = "zmk,behavior-macro";',
-            "            #binding-cells = <0>;",
-            "            wait-ms = <LOGOS_KANA_MACRO_WAIT_MS>;",
-            "            tap-ms = <LOGOS_KANA_MACRO_TAP_MS>;",
-            "            bindings = LOGOS_KANA_ON_BINDINGS;",
-            "        };",
-            "",
-            "        logos_kana_off: logos_kana_off {",
-            '            compatible = "zmk,behavior-macro";',
-            "            #binding-cells = <0>;",
-            "            wait-ms = <LOGOS_KANA_MACRO_WAIT_MS>;",
-            "            tap-ms = <LOGOS_KANA_MACRO_TAP_MS>;",
-            "            bindings = LOGOS_KANA_OFF_BINDINGS;",
-            "        };",
-            "",
-        ]
-    )
-
-    for row in rows:
-        output_bindings = " ".join(f"&kp {keycode_for_char(char)}" for char in row["romaji"])
-        lines.extend(
-            [
-                f"        {row['node']}: {row['node']} {{",
-                '            compatible = "zmk,behavior-macro";',
-                "            #binding-cells = <0>;",
-                "            wait-ms = <LOGOS_KANA_MACRO_WAIT_MS>;",
-                "            tap-ms = <LOGOS_KANA_MACRO_TAP_MS>;",
-                f"            bindings = <{output_bindings}>;",
-                "        };",
-                "",
-            ]
-        )
-
-        if row["key2"]:
-            pass_bindings = " ".join(
-                f"&kp {fallback_macro(key)}" for key in [row["key1"], row["key2"]]
-            )
-            lines.extend(
-                [
-                    f"        {row['node']}_pass: {row['node']}_pass {{",
-                    '            compatible = "zmk,behavior-macro";',
-                    "            #binding-cells = <0>;",
-                    "            wait-ms = <LOGOS_KANA_MACRO_WAIT_MS>;",
-                    "            tap-ms = <LOGOS_KANA_MACRO_TAP_MS>;",
-                    f"            bindings = <{pass_bindings}>;",
-                    "        };",
-                    "",
-                ]
-            )
-
-    lines.extend(
-        [
-            "    };",
-            "",
-            "    combos {",
-            '        compatible = "zmk,combos";',
-            "",
-        ]
-    )
-
-    for row in rows:
-        if not row["key2"]:
-            continue
-        lines.extend(
-            [
-                f"        combo_{row['node']} {{",
-                "            timeout-ms = <LOGOS_KANA_COMBO_TIMEOUT_MS>;",
-                f"            key-positions = <{position_macro(row['key1'])} {position_macro(row['key2'])}>;",
-                "            layers = <LOGOS_KANA_LAYER>;",
-                f"            bindings = <&{row['node']}_combo>;",
-                "        };",
-                "",
-            ]
-        )
-
-    lines.extend(["    };", "};", ""])
-    LOGOS_KANA_OUT.write_text("\n".join(lines), encoding="utf-8")
+    for index, key in enumerate(LAYOUT_KEY_ORDER):
+        lines.append(f"#define {key_define_for_layout_key(key):<26} {index}")
+    lines.extend(["", f"#define LOGOS_KANA_KEY_COUNT {len(LAYOUT_KEY_ORDER)}", ""])
+    KEYS_HEADER_OUT.parent.mkdir(parents=True, exist_ok=True)
+    KEYS_HEADER_OUT.write_text("\n".join(lines), encoding="utf-8")
 
 
 def write_qwerty_dtsi():
     lines = [
         "// Generated by tools/generate_logos_kana_zmk.py. Do not edit manually.",
         "",
+        "#include <dt-bindings/zmk/keys.h>",
+        "#include <dt-bindings/logos_kana/keys.h>",
+        "",
     ]
     for key in LAYOUT_KEY_ORDER:
-        define = fallback_macro(key)
+        define = binding_define_for_layout_key(key)
         lines.extend(
             [
                 f"#ifndef {define}",
-                f"#define {define} {keycode_for_layout_key(key)}",
+                f"#define {define} &lgk {key_define_for_layout_key(key)} {keycode_for_layout_key(key)}",
                 "#endif",
                 "",
             ]
         )
+    QWERTY_OUT.parent.mkdir(parents=True, exist_ok=True)
     QWERTY_OUT.write_text("\n".join(lines), encoding="utf-8")
 
 
-def write_profile_dtsi(rows):
+def write_profile_dtsi():
     bindings = ["&trans"] * TOTAL_POSITIONS
-    for row in rows:
-        if row["key2"]:
-            continue
-        bindings[KEY_POSITIONS[row["key1"]]] = f"&{row['node']}_key"
+    for key in LAYOUT_KEY_ORDER:
+        bindings[KEY_POSITIONS[key]] = binding_define_for_layout_key(key)
     bindings[KANA_TOGGLE_POSITION] = "LOGOS_KANA_TOGGLE_BINDING"
 
     offset = 0
     layer_rows = []
     for row_length in ROW_LENGTHS:
         row_bindings = bindings[offset : offset + row_length]
-        layer_rows.append(" ".join(f"{binding:<24}" for binding in row_bindings).rstrip())
+        layer_rows.append(" ".join(f"{binding:<20}" for binding in row_bindings).rstrip())
         offset += row_length
 
     if offset != TOTAL_POSITIONS:
@@ -453,54 +255,47 @@ def write_profile_dtsi(rows):
     lines = [
         "// Generated by tools/generate_logos_kana_zmk.py. Do not edit manually.",
         "",
-        "#ifndef LOGOS_KANA_TOTAL_POSITIONS",
-        f"#define LOGOS_KANA_TOTAL_POSITIONS {TOTAL_POSITIONS}",
-        "#endif",
-        "",
-        "#ifndef LOGOS_KANA_ROW_LENGTHS",
-        "#define LOGOS_KANA_ROW_LENGTHS 12 12 14 14 14",
-        "#endif",
-        "",
-        "#ifndef LOGOS_KANA_TOGGLE_POSITION",
-        f"#define LOGOS_KANA_TOGGLE_POSITION {KANA_TOGGLE_POSITION}",
-        "#endif",
-        "",
         "#ifndef LOGOS_KANA_TOGGLE_BINDING",
         "#define LOGOS_KANA_TOGGLE_BINDING &logos_kana_off",
         "#endif",
         "",
+        "#ifndef LOGOS_KANA_LAYER_BINDINGS",
+        "#define LOGOS_KANA_LAYER_BINDINGS \\",
     ]
-
-    for key in LAYOUT_KEY_ORDER:
-        define = position_macro(key)
-        lines.extend(
-            [
-                f"#ifndef {define}",
-                f"#define {define} {KEY_POSITIONS[key]}",
-                "#endif",
-                "",
-            ]
-        )
-
-    lines.extend(
-        [
-            "#ifndef LOGOS_KANA_LAYER_BINDINGS",
-            "#define LOGOS_KANA_LAYER_BINDINGS \\",
-        ]
-    )
     for index, layer_row in enumerate(layer_rows):
         suffix = " \\" if index < len(layer_rows) - 1 else ""
         lines.append(f"{layer_row}{suffix}")
     lines.extend(["#endif", ""])
+    PROFILE_OUT.parent.mkdir(parents=True, exist_ok=True)
     PROFILE_OUT.write_text("\n".join(lines), encoding="utf-8")
+
+
+def write_map_inc(rows):
+    lines = [
+        "/* Generated by tools/generate_logos_kana_zmk.py. Do not edit manually. */",
+        "",
+        "static const struct logos_kana_mapping logos_kana_mappings[] = {",
+    ]
+    for row in rows:
+        key1 = key_define_for_layout_key(row["key1"])
+        key2 = key_define_for_layout_key(row["key2"]) if row["key2"] else "LOGOS_KANA_KEY_NONE"
+        output = [keycode_for_char(char) for char in row["romaji"]]
+        output.append("LOGOS_KANA_OUTPUT_END")
+        lines.append(
+            f"    {{.key1 = {key1}, .key2 = {key2}, .output = {{{', '.join(output)}}}}},"
+            f" /* {row['romaji']} */"
+        )
+    lines.extend(["};", ""])
+    MAP_OUT.parent.mkdir(parents=True, exist_ok=True)
+    MAP_OUT.write_text("\n".join(lines), encoding="utf-8")
 
 
 def main():
     rows = prepare_rows()
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
-    write_main_dtsi(rows)
+    write_keys_header()
     write_qwerty_dtsi()
-    write_profile_dtsi(rows)
+    write_profile_dtsi()
+    write_map_inc(rows)
     print(
         "generated "
         f"{len(rows)} mappings "

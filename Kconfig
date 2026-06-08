@@ -1,0 +1,8 @@
+config LOGOS_KANA
+    bool "Enable Logos Kana behavior"
+    default y
+
+config LOGOS_KANA_COMBO_TIMEOUT_MS
+    int "Logos Kana combo timeout in milliseconds"
+    depends on LOGOS_KANA
+    default 60

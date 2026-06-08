@@ -39,9 +39,9 @@
 #define LOGOS_KANA_ON_BINDINGS <&kp JP_KANA>, <&tog KANA>
 #define LOGOS_KANA_OFF_BINDINGS <&kp JP_EISU>, <&tog KANA>
 
-#include "logos_kana/logos_kana_qwerty.dtsi"
-#include "logos_kana/logos_kana_torabo_tsuki_lp.dtsi"
-#include "logos_kana/logos_kana.dtsi"
+#include <behaviors/logos_kana_qwerty.dtsi>
+#include <behaviors/logos_kana_torabo_tsuki_lp.dtsi>
+#include <behaviors/logos_kana.dtsi>
 
 / {
     combos {

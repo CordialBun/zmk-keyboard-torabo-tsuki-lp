@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: MIT
+
+description: Logos Kana behavior
+
+compatible: "zmk,behavior-logos-kana"
+
+include: two_param.yaml
