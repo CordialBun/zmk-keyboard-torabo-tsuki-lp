@@ -65,8 +65,8 @@
         layer_2 {
             bindings = <
 &trans  &trans         &trans         &trans            &trans             &trans                  &trans   &trans        &trans        &trans        &trans          &trans
-&trans  &kp BACKSLASH  &kp CARET      &kp AT_SIGN       &kp SLASH          &trans                  &trans   &kp N7        &kp N8        &kp N9        &trans          &trans
-&trans  &kp COLON      &kp SEMICOLON  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &trans  &trans  &trans  &trans   &kp NUMBER_4  &kp N5        &kp NUMBER_6  &kp UNDERSCORE  &trans
+&trans  &kp JP_YEN  &kp JP_CARET      &kp JP_AT       &kp SLASH          &trans                  &trans   &kp N7        &kp N8        &kp N9        &trans          &trans
+&trans  &kp JP_COLON      &kp SEMICOLON  &kp JP_LBRACKET  &kp JP_RBRACKET  &trans  &trans  &trans  &trans   &kp NUMBER_4  &kp N5        &kp NUMBER_6  &kp JP_UNDERSCORE  &trans
 &trans  &trans         &trans         &mkp RCLK         &mkp LCLK          &trans  &trans  &trans  &trans   &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp N0          &trans
 &trans  &trans         &trans         &trans            &trans             &trans  &trans  &trans  &kp TAB  &kp DEL       &trans        &trans        &trans          &trans
             >;
@@ -75,9 +75,9 @@
         layer_3 {
             bindings = <
 &trans  &trans        &trans     &trans          &trans           &trans                  &trans  &trans            &trans                &trans                 &trans  &trans
-&trans  &kp PIPE      &kp TILDE  &kp GRAVE       &kp QUESTION     &trans                  &trans  &kp SINGLE_QUOTE  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &trans  &trans
-&trans  &kp ASTERISK  &kp PLUS   &kp LEFT_BRACE  &kp RIGHT_BRACE  &trans  &trans  &trans  &trans  &kp DOLLAR        &kp PERCENT           &kp AMPERSAND          &trans  &trans
-&trans  &trans        &trans     &trans          &trans           &trans  &trans  &trans  &trans  &kp EXCLAMATION   &kp DOUBLE_QUOTES     &kp HASH               &trans  &trans
+&trans  &kp JP_PIPE      &kp JP_TILDE  &kp JP_BACKQUOTE       &kp QUESTION     &trans                  &trans  &kp JP_QUOTE  &kp JP_LPAREN  &kp JP_RPAREN  &trans  &trans
+&trans  &kp JP_ASTERISK  &kp JP_PLUS   &kp JP_LBRACE  &kp JP_RBRACE  &trans  &trans  &trans  &trans  &kp DOLLAR        &kp PERCENT           &kp JP_AMPERSAND          &trans  &trans
+&trans  &trans        &trans     &trans          &trans           &trans  &trans  &trans  &trans  &kp EXCLAMATION   &kp JP_DQUOTE     &kp HASH               &trans  &trans
 &trans  &trans        &trans     &trans          &trans           &trans  &trans  &trans  &trans  &trans            &trans                &trans                 &trans  &trans
             >;
         };
