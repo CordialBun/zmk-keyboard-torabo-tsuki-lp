@@ -8,117 +8,117 @@
 #endif
 
 #ifndef LOGOS_KANA_W
-#define LOGOS_KANA_W &lgk LOGOS_KANA_KEY_W W
+#define LOGOS_KANA_W &lgk LOGOS_KANA_KEY_W F
 #endif
 
 #ifndef LOGOS_KANA_E
-#define LOGOS_KANA_E &lgk LOGOS_KANA_KEY_E E
+#define LOGOS_KANA_E &lgk LOGOS_KANA_KEY_E U
 #endif
 
 #ifndef LOGOS_KANA_R
-#define LOGOS_KANA_R &lgk LOGOS_KANA_KEY_R R
+#define LOGOS_KANA_R &lgk LOGOS_KANA_KEY_R DOT
 #endif
 
 #ifndef LOGOS_KANA_T
-#define LOGOS_KANA_T &lgk LOGOS_KANA_KEY_T T
+#define LOGOS_KANA_T &lgk LOGOS_KANA_KEY_T L
 #endif
 
 #ifndef LOGOS_KANA_Y
-#define LOGOS_KANA_Y &lgk LOGOS_KANA_KEY_Y Y
+#define LOGOS_KANA_Y &lgk LOGOS_KANA_KEY_Y B
 #endif
 
 #ifndef LOGOS_KANA_U
-#define LOGOS_KANA_U &lgk LOGOS_KANA_KEY_U U
+#define LOGOS_KANA_U &lgk LOGOS_KANA_KEY_U R
 #endif
 
 #ifndef LOGOS_KANA_I
-#define LOGOS_KANA_I &lgk LOGOS_KANA_KEY_I I
+#define LOGOS_KANA_I &lgk LOGOS_KANA_KEY_I Y
 #endif
 
 #ifndef LOGOS_KANA_O
-#define LOGOS_KANA_O &lgk LOGOS_KANA_KEY_O O
+#define LOGOS_KANA_O &lgk LOGOS_KANA_KEY_O H
 #endif
 
 #ifndef LOGOS_KANA_P
-#define LOGOS_KANA_P &lgk LOGOS_KANA_KEY_P P
+#define LOGOS_KANA_P &lgk LOGOS_KANA_KEY_P J
 #endif
 
 #ifndef LOGOS_KANA_A
-#define LOGOS_KANA_A &lgk LOGOS_KANA_KEY_A A
+#define LOGOS_KANA_A &lgk LOGOS_KANA_KEY_A E
 #endif
 
 #ifndef LOGOS_KANA_S
-#define LOGOS_KANA_S &lgk LOGOS_KANA_KEY_S S
+#define LOGOS_KANA_S &lgk LOGOS_KANA_KEY_S I
 #endif
 
 #ifndef LOGOS_KANA_D
-#define LOGOS_KANA_D &lgk LOGOS_KANA_KEY_D D
+#define LOGOS_KANA_D &lgk LOGOS_KANA_KEY_D A
 #endif
 
 #ifndef LOGOS_KANA_F
-#define LOGOS_KANA_F &lgk LOGOS_KANA_KEY_F F
+#define LOGOS_KANA_F &lgk LOGOS_KANA_KEY_F O
 #endif
 
 #ifndef LOGOS_KANA_G
-#define LOGOS_KANA_G &lgk LOGOS_KANA_KEY_G G
+#define LOGOS_KANA_G &lgk LOGOS_KANA_KEY_G MINUS
 #endif
 
 #ifndef LOGOS_KANA_H
-#define LOGOS_KANA_H &lgk LOGOS_KANA_KEY_H H
+#define LOGOS_KANA_H &lgk LOGOS_KANA_KEY_H W
 #endif
 
 #ifndef LOGOS_KANA_J
-#define LOGOS_KANA_J &lgk LOGOS_KANA_KEY_J J
+#define LOGOS_KANA_J &lgk LOGOS_KANA_KEY_J T
 #endif
 
 #ifndef LOGOS_KANA_K
-#define LOGOS_KANA_K &lgk LOGOS_KANA_KEY_K K
+#define LOGOS_KANA_K &lgk LOGOS_KANA_KEY_K N
 #endif
 
 #ifndef LOGOS_KANA_L
-#define LOGOS_KANA_L &lgk LOGOS_KANA_KEY_L L
+#define LOGOS_KANA_L &lgk LOGOS_KANA_KEY_L K
 #endif
 
 #ifndef LOGOS_KANA_SEMI
-#define LOGOS_KANA_SEMI &lgk LOGOS_KANA_KEY_SEMI SEMI
+#define LOGOS_KANA_SEMI &lgk LOGOS_KANA_KEY_SEMI S
 #endif
 
 #ifndef LOGOS_KANA_Z
-#define LOGOS_KANA_Z &lgk LOGOS_KANA_KEY_Z Z
+#define LOGOS_KANA_Z &lgk LOGOS_KANA_KEY_Z X
 #endif
 
 #ifndef LOGOS_KANA_X
-#define LOGOS_KANA_X &lgk LOGOS_KANA_KEY_X X
+#define LOGOS_KANA_X &lgk LOGOS_KANA_KEY_X C
 #endif
 
 #ifndef LOGOS_KANA_C
-#define LOGOS_KANA_C &lgk LOGOS_KANA_KEY_C C
+#define LOGOS_KANA_C &lgk LOGOS_KANA_KEY_C V
 #endif
 
 #ifndef LOGOS_KANA_V
-#define LOGOS_KANA_V &lgk LOGOS_KANA_KEY_V V
+#define LOGOS_KANA_V &lgk LOGOS_KANA_KEY_V COMMA
 #endif
 
 #ifndef LOGOS_KANA_B
-#define LOGOS_KANA_B &lgk LOGOS_KANA_KEY_B B
+#define LOGOS_KANA_B &lgk LOGOS_KANA_KEY_B SLASH
 #endif
 
 #ifndef LOGOS_KANA_N
-#define LOGOS_KANA_N &lgk LOGOS_KANA_KEY_N N
+#define LOGOS_KANA_N &lgk LOGOS_KANA_KEY_N P
 #endif
 
 #ifndef LOGOS_KANA_M
-#define LOGOS_KANA_M &lgk LOGOS_KANA_KEY_M M
+#define LOGOS_KANA_M &lgk LOGOS_KANA_KEY_M D
 #endif
 
 #ifndef LOGOS_KANA_COMMA
-#define LOGOS_KANA_COMMA &lgk LOGOS_KANA_KEY_COMMA COMMA
+#define LOGOS_KANA_COMMA &lgk LOGOS_KANA_KEY_COMMA M
 #endif
 
 #ifndef LOGOS_KANA_DOT
-#define LOGOS_KANA_DOT &lgk LOGOS_KANA_KEY_DOT DOT
+#define LOGOS_KANA_DOT &lgk LOGOS_KANA_KEY_DOT G
 #endif
 
 #ifndef LOGOS_KANA_SLASH
-#define LOGOS_KANA_SLASH &lgk LOGOS_KANA_KEY_SLASH SLASH
+#define LOGOS_KANA_SLASH &lgk LOGOS_KANA_KEY_SLASH Z
 #endif
