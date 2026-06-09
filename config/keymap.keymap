@@ -63,7 +63,7 @@
 &kp TAB    &kp Q         &kp F     &kp U     &kp DOT           &kp L                         &kp B   &kp R     &kp Y      &kp H     &kp J      &kp BSPC
 &kp LCTRL  &kp E         &kp I     &kp A     &kp O             &kp MINUS   &mkp LCLK  &mkp RCLK  &kp W   &kp T     &kp N      &kp K     &kp S      &kp ENTER
 &kp LSHFT  &kp X         &kp C     &kp V     &kp COMMA         &kp SLASH   &kp SPACE  &kp RET    &kp P   &kp D     &kp M      &kp G     &kp Z      &kp RSHFT
-&kp ESC    &kp LEFT_GUI  &kp LGUI  &kp LALT  &logos_kana_on  &mo NUM  &kp SPACE  &mo SYM    &mo NAV  &kp BSPC  &kp RALT   &kp RGUI  &kp LANG_ZENKAKUHANKAKU  &tog KANA
+&kp ESC    &kp LEFT_GUI  &kp LGUI  &kp LALT  &logos_kana_on  &mo NUM  &kp SPACE  &mo SYM    &mo NAV  &kp BSPC  &kp RALT   &kp RGUI  &kp LANG_ZENKAKUHANKAKU  &kp RCTRL
             >;
         };
 
