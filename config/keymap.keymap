@@ -34,7 +34,8 @@
 #define NAV  2
 #define NUM  3
 #define SYM  4
-#define QWE  5
+#define MOU  5
+#define QWE  6
 
 #define LOGOS_KANA_LAYER KANA
 #define LOGOS_KANA_ON_BINDINGS <&kp INT_MUHENKAN>, <&tog KANA>
@@ -64,7 +65,7 @@
 &kp TAB    &kp Q         &kp F     &kp U     &kp DOT           &kp L                         &kp B   &kp R     &kp Y      &kp H     &kp J      &kp BSPC
 &kp LCTRL  &kp E         &kp I     &kp A     &kp O             &kp MINUS   &mkp LCLK  &mkp RCLK  &kp W   &kp T     &kp N      &kp K     &kp S      &kp ENTER
 &kp LSHFT  &kp X         &kp C     &kp V     &kp COMMA         &kp SLASH   &kp SPACE  &kp RET    &kp P   &kp D     &kp M      &kp G     &kp Z      &kp RSHFT
-&kp ESC    &kp LEFT_GUI  &kp LGUI  &kp LALT  &logos_kana_on  &mo NUM  &kp SPACE  &mo SYM    &mo NAV  &kp BSPC  &kp RALT   &kp RGUI  &kp LANG_ZENKAKUHANKAKU  &tog QWE
+&kp ESC    &kp LEFT_GUI  &kp LALT  &mo MOU  &logos_kana_on  &mo NUM  &kp SPACE  &mo SYM    &mo NAV  &kp BSPC  &kp RALT   &kp RGUI  &kp LANG_ZENKAKUHANKAKU  &tog QWE
             >;
         };
 
@@ -85,7 +86,7 @@
 &trans  &trans         &trans         &trans            &trans             &trans                  &trans   &trans        &trans        &trans        &trans          &trans
 &trans  &kp JP_YEN  &kp JP_CARET      &kp JP_AT       &kp SLASH          &trans                  &trans   &kp N7        &kp N8        &kp N9        &trans          &trans
 &trans  &kp JP_COLON      &kp SEMICOLON  &kp JP_LBRACKET  &kp JP_RBRACKET  &trans  &trans  &trans  &trans   &kp NUMBER_4  &kp N5        &kp NUMBER_6  &kp JP_UNDERSCORE  &trans
-&trans  &trans         &trans         &mkp RCLK         &mkp LCLK          &trans  &trans  &trans  &trans   &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp N0          &trans
+&trans  &trans         &trans         &trans            &trans          &trans  &trans  &trans  &trans   &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp N0          &trans
 &trans  &trans         &trans         &trans            &trans             &trans  &trans  &trans  &kp TAB  &kp DEL       &trans        &trans        &trans          &trans
             >;
         };
@@ -96,6 +97,16 @@
 &trans  &kp JP_PIPE      &kp JP_TILDE  &kp JP_BACKQUOTE       &kp QUESTION     &trans                  &trans  &kp JP_QUOTE  &kp JP_LPAREN  &kp JP_RPAREN  &trans  &trans
 &trans  &kp JP_ASTERISK  &kp JP_PLUS   &kp JP_LBRACE  &kp JP_RBRACE  &trans  &trans  &trans  &trans  &kp DOLLAR        &kp PERCENT           &kp JP_AMPERSAND          &trans  &trans
 &trans  &trans        &trans     &trans          &trans           &trans  &trans  &trans  &trans  &kp EXCLAMATION   &kp JP_DQUOTE     &kp HASH               &trans  &trans
+&trans  &trans        &trans     &trans          &trans           &trans  &trans  &trans  &trans  &trans            &trans                &trans                 &trans  &trans
+            >;
+        };
+
+        mou_layer {
+            bindings = <
+&trans  &trans        &trans     &trans          &trans           &trans                  &trans  &trans            &trans                &trans                 &trans  &trans
+&trans  &trans        trans      &trans          &trans           &trans                  &trans  &trans            &trans                &trans                 &trans  &trans
+&trans  &trans        &trans     &trans          &trans           &trans  &trans  &trans  &trans  &mkp LCLK         &mkp RCLK             &mkp MB4               &mkp MB5  &trans
+&trans  &trans        &trans     &trans          &trans           &trans  &trans  &trans  &trans  &trans            &trans                &trans                 &trans  &trans
 &trans  &trans        &trans     &trans          &trans           &trans  &trans  &trans  &trans  &trans            &trans                &trans                 &trans  &trans
             >;
         };
