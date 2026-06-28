@@ -10,7 +10,7 @@ static const struct logos_kana_mapping logos_kana_mappings[] = {
     {.key1 = LOGOS_KANA_KEY_U, .key2 = LOGOS_KANA_KEY_NONE, .output = {T, U, LOGOS_KANA_OUTPUT_END}}, /* tu */
     {.key1 = LOGOS_KANA_KEY_I, .key2 = LOGOS_KANA_KEY_NONE, .output = {K, U, LOGOS_KANA_OUTPUT_END}}, /* ku */
     {.key1 = LOGOS_KANA_KEY_O, .key2 = LOGOS_KANA_KEY_NONE, .output = {X, T, U, LOGOS_KANA_OUTPUT_END}}, /* xtu */
-    {.key1 = LOGOS_KANA_KEY_P, .key2 = LOGOS_KANA_KEY_NONE, .output = {H, I, LOGOS_KANA_OUTPUT_END}}, /* hi */
+    {.key1 = LOGOS_KANA_KEY_P, .key2 = LOGOS_KANA_KEY_NONE, .output = {M, I, LOGOS_KANA_OUTPUT_END}}, /* mi */
     {.key1 = LOGOS_KANA_KEY_A, .key2 = LOGOS_KANA_KEY_NONE, .output = {K, A, LOGOS_KANA_OUTPUT_END}}, /* ka */
     {.key1 = LOGOS_KANA_KEY_S, .key2 = LOGOS_KANA_KEY_NONE, .output = {T, O, LOGOS_KANA_OUTPUT_END}}, /* to */
     {.key1 = LOGOS_KANA_KEY_D, .key2 = LOGOS_KANA_KEY_NONE, .output = {T, A, LOGOS_KANA_OUTPUT_END}}, /* ta */
@@ -23,10 +23,10 @@ static const struct logos_kana_mapping logos_kana_mappings[] = {
     {.key1 = LOGOS_KANA_KEY_SEMI, .key2 = LOGOS_KANA_KEY_NONE, .output = {S, I, LOGOS_KANA_OUTPUT_END}}, /* si */
     {.key1 = LOGOS_KANA_KEY_Z, .key2 = LOGOS_KANA_KEY_NONE, .output = {Y, O, LOGOS_KANA_OUTPUT_END}}, /* yo */
     {.key1 = LOGOS_KANA_KEY_X, .key2 = LOGOS_KANA_KEY_NONE, .output = {D, A, LOGOS_KANA_OUTPUT_END}}, /* da */
-    {.key1 = LOGOS_KANA_KEY_C, .key2 = LOGOS_KANA_KEY_NONE, .output = {D, O, LOGOS_KANA_OUTPUT_END}}, /* do */
+    {.key1 = LOGOS_KANA_KEY_C, .key2 = LOGOS_KANA_KEY_NONE, .output = {S, U, LOGOS_KANA_OUTPUT_END}}, /* su */
     {.key1 = LOGOS_KANA_KEY_V, .key2 = LOGOS_KANA_KEY_NONE, .output = {G, A, LOGOS_KANA_OUTPUT_END}}, /* ga */
     {.key1 = LOGOS_KANA_KEY_B, .key2 = LOGOS_KANA_KEY_NONE, .output = {R, A, LOGOS_KANA_OUTPUT_END}}, /* ra */
-    {.key1 = LOGOS_KANA_KEY_N, .key2 = LOGOS_KANA_KEY_NONE, .output = {W, A, LOGOS_KANA_OUTPUT_END}}, /* wa */
+    {.key1 = LOGOS_KANA_KEY_N, .key2 = LOGOS_KANA_KEY_NONE, .output = {M, A, LOGOS_KANA_OUTPUT_END}}, /* ma */
     {.key1 = LOGOS_KANA_KEY_M, .key2 = LOGOS_KANA_KEY_NONE, .output = {R, U, LOGOS_KANA_OUTPUT_END}}, /* ru */
     {.key1 = LOGOS_KANA_KEY_COMMA, .key2 = LOGOS_KANA_KEY_NONE, .output = {MINUS, LOGOS_KANA_OUTPUT_END}}, /* - */
     {.key1 = LOGOS_KANA_KEY_DOT, .key2 = LOGOS_KANA_KEY_NONE, .output = {R, E, LOGOS_KANA_OUTPUT_END}}, /* re */
@@ -38,15 +38,15 @@ static const struct logos_kana_mapping logos_kana_mappings[] = {
     {.key1 = LOGOS_KANA_KEY_K, .key2 = LOGOS_KANA_KEY_T, .output = {Z, E, LOGOS_KANA_OUTPUT_END}}, /* ze */
     {.key1 = LOGOS_KANA_KEY_D, .key2 = LOGOS_KANA_KEY_Y, .output = {D, U, LOGOS_KANA_OUTPUT_END}}, /* du */
     {.key1 = LOGOS_KANA_KEY_D, .key2 = LOGOS_KANA_KEY_U, .output = {Y, U, LOGOS_KANA_OUTPUT_END}}, /* yu */
-    {.key1 = LOGOS_KANA_KEY_D, .key2 = LOGOS_KANA_KEY_I, .output = {H, U, LOGOS_KANA_OUTPUT_END}}, /* hu */
+    {.key1 = LOGOS_KANA_KEY_D, .key2 = LOGOS_KANA_KEY_I, .output = {H, I, LOGOS_KANA_OUTPUT_END}}, /* hi */
     {.key1 = LOGOS_KANA_KEY_D, .key2 = LOGOS_KANA_KEY_O, .output = {B, I, LOGOS_KANA_OUTPUT_END}}, /* bi */
     {.key1 = LOGOS_KANA_KEY_D, .key2 = LOGOS_KANA_KEY_P, .output = {V, U, LOGOS_KANA_OUTPUT_END}}, /* vu */
     {.key1 = LOGOS_KANA_KEY_K, .key2 = LOGOS_KANA_KEY_A, .output = {K, E, LOGOS_KANA_OUTPUT_END}}, /* ke */
-    {.key1 = LOGOS_KANA_KEY_K, .key2 = LOGOS_KANA_KEY_S, .output = {N, A, LOGOS_KANA_OUTPUT_END}}, /* na */
-    {.key1 = LOGOS_KANA_KEY_K, .key2 = LOGOS_KANA_KEY_D, .output = {K, O, LOGOS_KANA_OUTPUT_END}}, /* ko */
+    {.key1 = LOGOS_KANA_KEY_K, .key2 = LOGOS_KANA_KEY_S, .output = {K, O, LOGOS_KANA_OUTPUT_END}}, /* ko */
+    {.key1 = LOGOS_KANA_KEY_K, .key2 = LOGOS_KANA_KEY_D, .output = {N, A, LOGOS_KANA_OUTPUT_END}}, /* na */
     {.key1 = LOGOS_KANA_KEY_K, .key2 = LOGOS_KANA_KEY_F, .output = {DOT, LOGOS_KANA_OUTPUT_END}}, /* . */
     {.key1 = LOGOS_KANA_KEY_K, .key2 = LOGOS_KANA_KEY_G, .output = {Z, I, LOGOS_KANA_OUTPUT_END}}, /* zi */
-    {.key1 = LOGOS_KANA_KEY_D, .key2 = LOGOS_KANA_KEY_H, .output = {S, O, LOGOS_KANA_OUTPUT_END}}, /* so */
+    {.key1 = LOGOS_KANA_KEY_D, .key2 = LOGOS_KANA_KEY_H, .output = {R, O, LOGOS_KANA_OUTPUT_END}}, /* ro */
     {.key1 = LOGOS_KANA_KEY_D, .key2 = LOGOS_KANA_KEY_J, .output = {O, LOGOS_KANA_OUTPUT_END}}, /* o */
     {.key1 = LOGOS_KANA_KEY_D, .key2 = LOGOS_KANA_KEY_SEMI, .output = {A, LOGOS_KANA_OUTPUT_END}}, /* a */
     {.key1 = LOGOS_KANA_KEY_K, .key2 = LOGOS_KANA_KEY_Z, .output = {P, I, LOGOS_KANA_OUTPUT_END}}, /* pi */
@@ -55,7 +55,7 @@ static const struct logos_kana_mapping logos_kana_mappings[] = {
     {.key1 = LOGOS_KANA_KEY_K, .key2 = LOGOS_KANA_KEY_V, .output = {B, A, LOGOS_KANA_OUTPUT_END}}, /* ba */
     {.key1 = LOGOS_KANA_KEY_K, .key2 = LOGOS_KANA_KEY_B, .output = {P, A, LOGOS_KANA_OUTPUT_END}}, /* pa */
     {.key1 = LOGOS_KANA_KEY_D, .key2 = LOGOS_KANA_KEY_N, .output = {N, U, LOGOS_KANA_OUTPUT_END}}, /* nu */
-    {.key1 = LOGOS_KANA_KEY_D, .key2 = LOGOS_KANA_KEY_M, .output = {M, I, LOGOS_KANA_OUTPUT_END}}, /* mi */
+    {.key1 = LOGOS_KANA_KEY_D, .key2 = LOGOS_KANA_KEY_M, .output = {H, U, LOGOS_KANA_OUTPUT_END}}, /* hu */
     {.key1 = LOGOS_KANA_KEY_D, .key2 = LOGOS_KANA_KEY_COMMA, .output = {G, U, LOGOS_KANA_OUTPUT_END}}, /* gu */
     {.key1 = LOGOS_KANA_KEY_D, .key2 = LOGOS_KANA_KEY_DOT, .output = {D, H, I, LOGOS_KANA_OUTPUT_END}}, /* dhi */
     {.key1 = LOGOS_KANA_KEY_D, .key2 = LOGOS_KANA_KEY_SLASH, .output = {P, U, LOGOS_KANA_OUTPUT_END}}, /* pu */
@@ -69,13 +69,13 @@ static const struct logos_kana_mapping logos_kana_mappings[] = {
     {.key1 = LOGOS_KANA_KEY_S, .key2 = LOGOS_KANA_KEY_I, .output = {G, O, LOGOS_KANA_OUTPUT_END}}, /* go */
     {.key1 = LOGOS_KANA_KEY_S, .key2 = LOGOS_KANA_KEY_O, .output = {B, E, LOGOS_KANA_OUTPUT_END}}, /* be */
     {.key1 = LOGOS_KANA_KEY_S, .key2 = LOGOS_KANA_KEY_P, .output = {X, E, LOGOS_KANA_OUTPUT_END}}, /* xe */
-    {.key1 = LOGOS_KANA_KEY_L, .key2 = LOGOS_KANA_KEY_A, .output = {K, I, LOGOS_KANA_OUTPUT_END}}, /* ki */
+    {.key1 = LOGOS_KANA_KEY_L, .key2 = LOGOS_KANA_KEY_A, .output = {D, O, LOGOS_KANA_OUTPUT_END}}, /* do */
     {.key1 = LOGOS_KANA_KEY_L, .key2 = LOGOS_KANA_KEY_S, .output = {R, I, LOGOS_KANA_OUTPUT_END}}, /* ri */
-    {.key1 = LOGOS_KANA_KEY_L, .key2 = LOGOS_KANA_KEY_D, .output = {S, U, LOGOS_KANA_OUTPUT_END}}, /* su */
+    {.key1 = LOGOS_KANA_KEY_L, .key2 = LOGOS_KANA_KEY_D, .output = {K, I, LOGOS_KANA_OUTPUT_END}}, /* ki */
     {.key1 = LOGOS_KANA_KEY_L, .key2 = LOGOS_KANA_KEY_F, .output = {D, E, LOGOS_KANA_OUTPUT_END}}, /* de */
     {.key1 = LOGOS_KANA_KEY_L, .key2 = LOGOS_KANA_KEY_G, .output = {Y, A, LOGOS_KANA_OUTPUT_END}}, /* ya */
-    {.key1 = LOGOS_KANA_KEY_S, .key2 = LOGOS_KANA_KEY_H, .output = {R, O, LOGOS_KANA_OUTPUT_END}}, /* ro */
-    {.key1 = LOGOS_KANA_KEY_S, .key2 = LOGOS_KANA_KEY_J, .output = {M, A, LOGOS_KANA_OUTPUT_END}}, /* ma */
+    {.key1 = LOGOS_KANA_KEY_S, .key2 = LOGOS_KANA_KEY_H, .output = {W, A, LOGOS_KANA_OUTPUT_END}}, /* wa */
+    {.key1 = LOGOS_KANA_KEY_S, .key2 = LOGOS_KANA_KEY_J, .output = {S, O, LOGOS_KANA_OUTPUT_END}}, /* so */
     {.key1 = LOGOS_KANA_KEY_S, .key2 = LOGOS_KANA_KEY_SEMI, .output = {M, O, LOGOS_KANA_OUTPUT_END}}, /* mo */
     {.key1 = LOGOS_KANA_KEY_L, .key2 = LOGOS_KANA_KEY_Z, .output = {X, O, LOGOS_KANA_OUTPUT_END}}, /* xo */
     {.key1 = LOGOS_KANA_KEY_L, .key2 = LOGOS_KANA_KEY_X, .output = {P, E, LOGOS_KANA_OUTPUT_END}}, /* pe */
