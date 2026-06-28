@@ -42,8 +42,8 @@ static const struct logos_kana_mapping logos_kana_mappings[] = {
     {.key1 = LOGOS_KANA_KEY_D, .key2 = LOGOS_KANA_KEY_O, .output = {B, I, LOGOS_KANA_OUTPUT_END}}, /* bi */
     {.key1 = LOGOS_KANA_KEY_D, .key2 = LOGOS_KANA_KEY_P, .output = {V, U, LOGOS_KANA_OUTPUT_END}}, /* vu */
     {.key1 = LOGOS_KANA_KEY_K, .key2 = LOGOS_KANA_KEY_A, .output = {K, E, LOGOS_KANA_OUTPUT_END}}, /* ke */
-    {.key1 = LOGOS_KANA_KEY_K, .key2 = LOGOS_KANA_KEY_S, .output = {K, O, LOGOS_KANA_OUTPUT_END}}, /* ko */
-    {.key1 = LOGOS_KANA_KEY_K, .key2 = LOGOS_KANA_KEY_D, .output = {N, A, LOGOS_KANA_OUTPUT_END}}, /* na */
+    {.key1 = LOGOS_KANA_KEY_K, .key2 = LOGOS_KANA_KEY_S, .output = {N, A, LOGOS_KANA_OUTPUT_END}}, /* na */
+    {.key1 = LOGOS_KANA_KEY_K, .key2 = LOGOS_KANA_KEY_D, .output = {K, O, LOGOS_KANA_OUTPUT_END}}, /* ko */
     {.key1 = LOGOS_KANA_KEY_K, .key2 = LOGOS_KANA_KEY_F, .output = {DOT, LOGOS_KANA_OUTPUT_END}}, /* . */
     {.key1 = LOGOS_KANA_KEY_K, .key2 = LOGOS_KANA_KEY_G, .output = {Z, I, LOGOS_KANA_OUTPUT_END}}, /* zi */
     {.key1 = LOGOS_KANA_KEY_D, .key2 = LOGOS_KANA_KEY_H, .output = {R, O, LOGOS_KANA_OUTPUT_END}}, /* ro */
